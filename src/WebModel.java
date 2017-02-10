@@ -1,32 +1,36 @@
-/**
- * Created by olli14 on 2017-01-27.
- */
 import java.net.*;
 import java.io.*;
 import java.util.Scanner;
+/**
+ * Created by olli14 on 2017-01-27.
+ */
 
 public class WebModel {
-    public static String getText(String url) throws Exception {
-        URL website = new URL(url);
+
+
+    public static void main(String[] args) throws Exception {
+
+        int i = 0;
+
+        System.out.println("Enter URL: ");
+        Scanner urlInput = new Scanner(System.in);
+        String urlString = urlInput.nextLine();
+
+        URL website = new URL(urlString);
         URLConnection connection = website.openConnection();
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(
                         connection.getInputStream()));
 
-        StringBuilder response = new StringBuilder();
         String inputLine;
 
-        while ((inputLine = in.readLine()) != null)
-            response.append(inputLine);
+        while ((inputLine = in.readLine()) != null){
+            System.out.println(inputLine);
+            i++;
+        }
+        System.out.println("The URL contains " + i + " rows.");
 
         in.close();
 
-        return response.toString();
-    }
-    String out = new Scanner(new URL("http://www.google.com").openStream(), "UTF-8").useDelimiter("\\A").next();
-
-    public static void main(String[] args) throws Exception {
-        String content = WebModel.getText(args[0]);
-        System.out.println(content);
     }
 }
